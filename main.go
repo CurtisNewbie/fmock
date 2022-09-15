@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/curtisnewbie/fmock/fmock/service/auth"
 	"github.com/curtisnewbie/fmock/fmock/service/file"
 	"github.com/curtisnewbie/gocommon/config"
@@ -11,15 +9,10 @@ import (
 )
 
 func main() {
-	profile := config.ParseProfile(os.Args)
-	conf, e := config.ParseJsonConfig(config.ParseConfigFilePath(os.Args, profile))
-	if e != nil {
-		panic(e)
-	}
-	config.SetGlobalConfig(conf)
+	profile, conf := config.DefaultParseProfConf()
 
 	// bootstrap web server
-	e = server.BootstrapServer(&conf.ServerConf, config.IsProd(profile), func(router *gin.Engine) {
+	e := server.BootstrapServer(&conf.ServerConf, config.IsProd(profile), func(router *gin.Engine) {
 		auth.RegisterRoutes(router)
 		file.RegisterRoutes(router)
 	})

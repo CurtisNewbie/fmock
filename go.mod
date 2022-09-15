@@ -3,7 +3,7 @@ module github.com/curtisnewbie/fmock
 go 1.18
 
 require (
-	github.com/curtisnewbie/gocommon v0.0.0-20220911080852-ed94271b56fa
+	github.com/curtisnewbie/gocommon v0.0.0-20220915162628-ade29b055cad
 	github.com/gin-gonic/gin v1.8.1
 )
 
