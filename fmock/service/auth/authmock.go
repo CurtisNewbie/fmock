@@ -17,7 +17,7 @@ func RegisterRoutes(router *gin.Engine) {
 	})
 
 	router.GET("/auth-service/open/api/user/info", func(c *gin.Context) {
-		util.DispatchOkWData(c, UserWebVo{Id: 1, Username: "ZhuangyongjMock", Role: "admin"})
+		util.DispatchOkWData(c, UserWebVo{Id: 1, Username: "Zhuangyongj Mock", Role: "admin"})
 	})
 
 }

@@ -8,6 +8,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type Tag struct {
+	Id int `json:"id"`
+
+	/** name of tag */
+	Name string `json:"name"`
+
+	/** when the record is created */
+	CreateTime string `json:"createTime"`
+
+	/** who created this record */
+	CreateBy string `json:"createBy"`
+}
+
+type ListTagsForFileResp struct {
+	Paging  dto.Paging `json:"pagingVo"`
+	Payload []Tag      `json:"payload"`
+}
+
 type ListFileInfoWebVo struct {
 	Payload []FileInfoWebVo `json:"payload"`
 	Paging  dto.Paging      `json:"pagingVo"`
@@ -61,6 +79,15 @@ func RegisterRoutes(router *gin.Engine) {
 		l := []string{}
 		l = append(l, "Movie", "Book", "Coding", "Other")
 		util.DispatchOkWData(c, l)
+	})
+
+	router.POST("/file-service/open/api/file/tag/list-for-file", func(c *gin.Context) {
+		l := []Tag{}
+		l = append(l, Tag{Id: 1, Name: "Movie", CreateTime: "2022-09-28", CreateBy: "Zhuangyongj"})
+		l = append(l, Tag{Id: 2, Name: "Book", CreateTime: "2022-09-28", CreateBy: "Zhuangyongj"})
+		l = append(l, Tag{Id: 3, Name: "Coding", CreateTime: "2022-09-28", CreateBy: "Zhuangyongj"})
+		l = append(l, Tag{Id: 4, Name: "Other", CreateTime: "2022-09-28", CreateBy: "Zhuangyongj"})
+		util.DispatchOkWData(c, ListTagsForFileResp{Payload: l, Paging: dto.Paging{Total: 1}})
 	})
 
 }
