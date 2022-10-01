@@ -61,17 +61,24 @@ type FileInfoWebVo struct {
 	FileType string `json:"fileType"`
 }
 
+type DirBrief struct {
+	Id   int    `json:"id"`
+	Uuid string `json:"uuid"`
+	Name string `json:"name"`
+}
+
 func RegisterRoutes(router *gin.Engine) {
 	router.POST("/file-service/open/api/file/list", func(c *gin.Context) {
 		l := []FileInfoWebVo{}
-		f := FileInfoWebVo{Id: 1, Uuid: "YBA24ZE-GN0NXT-7ZGY45-MONQLF", Name: "Good Movie.mp4", UploaderName: "Zhuangyongj", UploadTime: dto.TTime(time.Now()), SizeInBytes: 1000000, UserGroup: 0, IsOwner: true, FileType: "FILE"}
-		l = append(l, f)
-		util.DispatchOkWData(c, ListFileInfoWebVo{Payload: l, Paging: dto.Paging{Total: 1}})
+		l = append(l, FileInfoWebVo{Id: 1, Uuid: "YBA24ZE-GN0NXT-7ZGY45-MONQLF", Name: "Good Movie.mp4", UploaderName: "Zhuangyongj", UploadTime: dto.TTime(time.Now()), SizeInBytes: 1000000, UserGroup: 0, IsOwner: true, FileType: "FILE"})
+		l = append(l, FileInfoWebVo{Id: 2, Uuid: "KDKDFBB-GN0NXT-7ZGY45-MONQLF", Name: "Good Movies", UploaderName: "Zhuangyongj", UploadTime: dto.TTime(time.Now()), SizeInBytes: 1000000, UserGroup: 0, IsOwner: true, FileType: "DIR"})
+
+		util.DispatchOkWData(c, ListFileInfoWebVo{Payload: l, Paging: dto.Paging{Total: 2}})
 	})
 
 	router.GET("/file-service/open/api/file/extension/name", func(c *gin.Context) {
 		l := []string{}
-		l = append(l, "mp4", "txt", "zip", "jpg", "jpeg")
+		l = append(l, "mp4", "txt", "zip", "jpg", "jpeg", "gzip", "txt", "png", "mov")
 		util.DispatchOkWData(c, l)
 	})
 
@@ -90,4 +97,10 @@ func RegisterRoutes(router *gin.Engine) {
 		util.DispatchOkWData(c, ListTagsForFileResp{Payload: l, Paging: dto.Paging{Total: 1}})
 	})
 
+	router.GET("/file-service/open/api/file/dir/list", func(c *gin.Context) {
+		l := []DirBrief{}
+		l = append(l, DirBrief{Id: 1, Uuid: "YBA24ZE-GN0NXT-7ZGY45-XXXXX", Name: "Old Movies"})
+		l = append(l, DirBrief{Id: 2, Uuid: "YBA24ZE-GN0NXT-7ZGY45-VVVVV", Name: "Good Movies"})
+		util.DispatchOkWData(c, l)
+	})
 }
