@@ -10,13 +10,20 @@ import (
 	"github.com/curtisnewbie/gocommon/common"
 	"github.com/curtisnewbie/gocommon/server"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func mockHandler(dataFile string, url string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		if dataFile == "" {
+			server.DispatchErrMsgJson(ctx, "Not supported for mocking")
+			return
+		}
+
 		data, err := ioutil.ReadFile("fmock/service/mockdata/" + dataFile)
 		if err != nil {
-			panic(fmt.Sprintf("unable to read datafile for '%s', %v", url, err))
+			logrus.Errorf("unable to read datafile for '%s', %v", url, err)
+			server.DispatchErrMsgJson(ctx, "Not supported for mocking")
 		}
 		ctx.Data(http.StatusOK, "application/json", data)
 	}

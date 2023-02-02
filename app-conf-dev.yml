@@ -30,7 +30,7 @@ mock:
     r6:
       url: "/file-service/open/api/file/tag/list-for-file"
       data: tagsforfile.json 
-      method: get 
+      method: post
     r7:
       url: "/auth-service/open/api/token/exchange"
       data: log.json
@@ -39,3 +39,18 @@ mock:
       url: "/file-service/open/api/file/dir/list"
       data: dirlist.json 
       method: get 
+    r9:
+      url: "/file-service/open/api/file/token/generate"
+      data: tkngen.json 
+      method: post
+    r10:
+      url: "file-service/open/api/vfolder/brief/owned"
+      data: listfolderbrief.json 
+      method: get 
+    r11:
+      url: "file-service/open/api/file/info/update"
+      method: "post"
+    r12:
+      url: "file-service/open/api/file/delete"
+      method: "post"
+

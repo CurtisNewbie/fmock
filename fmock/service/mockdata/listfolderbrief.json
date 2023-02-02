@@ -1,0 +1,11 @@
+{
+    "errorCode": null,
+    "msg": null,
+    "error": false,
+    "data": [
+        {
+            "folderNo": "VFLDR-12123123123123",
+            "name": "My Folder"
+        }
+    ]
+}
