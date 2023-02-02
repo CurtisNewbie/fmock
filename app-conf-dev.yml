@@ -1,0 +1,41 @@
+mode.production: false
+
+server: 
+  host: localhost
+  port: 7070
+  gracefulShutdownTimeSec: 5
+
+mock:
+  routes:
+    r1:
+      url:  "/auth-service/open/api/user/login"
+      data: login.json
+      method: post 
+    r2:
+      url: "/auth-service/open/api/user/info"
+      data: userinfo.json 
+      method: get 
+    r3:
+      url: "/file-service/open/api/file/list"
+      data: filelist.json 
+      method: post 
+    r4:
+      url: "/file-service/open/api/file/extension/name"
+      data: fileextname.json 
+      method: get 
+    r5:
+      url: "/file-service/open/api/file/tag/list/all"
+      data: tagall.json 
+      method: get 
+    r6:
+      url: "/file-service/open/api/file/tag/list-for-file"
+      data: tagsforfile.json 
+      method: get 
+    r7:
+      url: "/auth-service/open/api/token/exchange"
+      data: log.json
+      method: post 
+    r8:
+      url: "/file-service/open/api/file/dir/list"
+      data: dirlist.json 
+      method: get 

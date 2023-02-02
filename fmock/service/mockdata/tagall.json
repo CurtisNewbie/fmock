@@ -1,0 +1,34 @@
+{
+    "errorCode": null,
+    "msg": null,
+    "error": false,
+    "paging": {
+        "total": 4
+    },
+    "payload": [
+        {
+            "id": 1,
+            "name": "Movie",
+            "createTime": "2022-09-28",
+            "createBy": "yongj.zhuang"
+        },
+        {
+            "id": 2,
+            "name": "Book",
+            "createTime": "2022-09-28",
+            "createBy": "yongj.zhuang"
+        },
+        {
+            "id": 3,
+            "name": "Coding",
+            "createTime": "2022-09-28",
+            "createBy": "yongj.zhuang"
+        },
+        {
+            "id": 4,
+            "name": "Other",
+            "createTime": "2022-09-28",
+            "createBy": "yongj.zhuang"
+        }
+    ]
+}

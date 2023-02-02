@@ -1,23 +1,59 @@
 package main
 
 import (
-	"github.com/curtisnewbie/fmock/fmock/service/auth"
-	"github.com/curtisnewbie/fmock/fmock/service/file"
-	"github.com/curtisnewbie/gocommon/config"
-	"github.com/curtisnewbie/gocommon/web/server"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"strings"
+
+	"github.com/curtisnewbie/gocommon/common"
+	"github.com/curtisnewbie/gocommon/server"
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	profile, conf := config.DefaultParseProfConf()
-
-	// bootstrap web server
-	e := server.BootstrapServer(&conf.ServerConf, config.IsProd(profile), func(router *gin.Engine) {
-		auth.RegisterRoutes(router)
-		file.RegisterRoutes(router)
-	})
-
-	if e != nil {
-		panic(e)
+func mockHandler(dataFile string, url string) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		data, err := ioutil.ReadFile("fmock/service/mockdata/" + dataFile)
+		if err != nil {
+			panic(fmt.Sprintf("unable to read datafile for '%s', %v", url, err))
+		}
+		ctx.Data(http.StatusOK, "application/json", data)
 	}
+}
+
+func main() {
+
+	common.DefaultReadConfig(os.Args)
+
+	for i := 1; true; i++ {
+		id := fmt.Sprintf("r%d", i)
+		url := common.GetPropStr(fmt.Sprintf("mock.routes.%s.url", id))
+		if url == "" {
+			break
+		}
+
+		dataFile := common.GetPropStr(fmt.Sprintf("mock.routes.%s.data", id))
+		method := common.GetPropStr(fmt.Sprintf("mock.routes.%s.method", id))
+		method = strings.ToUpper(method)
+
+		if method == "GET" {
+			server.PubGet(url, mockHandler(dataFile, url))
+		}
+		if method == "POST" {
+			server.PubPost(url, mockHandler(dataFile, url))
+		}
+		if method == "DELETE" {
+			server.PubDelete(url, mockHandler(dataFile, url))
+		}
+		if method == "PUT" {
+			server.PubPut(url, mockHandler(dataFile, url))
+		}
+	}
+
+	// configure logging
+	server.ConfigureLogging()
+
+	// bootstraping
+	server.BootstrapServer()
 }

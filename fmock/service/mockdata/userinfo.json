@@ -1,0 +1,10 @@
+{
+    "errorCode": null,
+    "msg": null,
+    "error": false,
+    "data": {
+        "id": 1,
+        "username": "zhuangyongj mock",
+        "role": "admin"
+    }
+}

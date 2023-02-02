@@ -1,0 +1,23 @@
+{
+    "errorCode": null,
+    "msg": null,
+    "error": false,
+    "data": {
+        "payload": [
+            {
+                "id": 1,
+                "uuid": "YBA24ZE-GN0NXT-7ZGY45-MONQLF",
+                "name": "Good Movie.mp4",
+                "uploaderName": "zhuangyongj",
+                "uploadTime": "2023-02-02 15:53:19",
+                "sizeInBytes": 100000,
+                "userGroup": 0,
+                "isOwner": true,
+                "fileType": "FILE"
+            }
+        ],
+        "paging": {
+            "total": 1
+        }
+    }
+}

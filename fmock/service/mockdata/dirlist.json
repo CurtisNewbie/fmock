@@ -1,0 +1,20 @@
+{
+    "errorCode": null,
+    "msg": null,
+    "error": false,
+    "paging": {
+        "total": 2
+    },
+    "payload": [
+        {
+            "id": 1,
+            "uuid": "YBA24ZE-GN0NXT-7ZGY45-XXXXX",
+            "name": "Old Movies"
+        },
+        {
+            "id": 2,
+            "uuid": "YBA24ZE-GN0NXT-7ZGY45-YYYYY",
+            "name": "Good Movies"
+        }
+    ]
+}
